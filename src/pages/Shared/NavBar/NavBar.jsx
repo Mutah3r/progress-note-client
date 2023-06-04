@@ -1,13 +1,18 @@
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo.png'
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
     const navLinks = (<>
         <li className="font-semibold text-[#7780A1]"><Link to="/">Home</Link></li>
-        <li className="font-semibold text-[#7780A1]"><Link to="/login">Login</Link></li>
-        <li className="font-semibold text-[#7780A1]"><Link to="/signup">SignUp</Link></li>
-        <li className="font-semibold text-[#7780A1]"><Link to="/tasks">My Tasks</Link></li>
+        {!user && <li className="font-semibold text-[#7780A1]"><Link to="/login">Login</Link></li>}
+        {!user && <li className="font-semibold text-[#7780A1]"><Link to="/signup">SignUp</Link></li>}
+        {user && <li className="font-semibold text-[#7780A1]"><Link to="/tasks">My Tasks</Link></li>}
+        {user && <li className="font-semibold text-[#7780A1]"><button onClick={logOut}>Logout</button></li>}
     </>);
 
     return (
@@ -32,11 +37,13 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 {/* <a className="button button-primary">My Tasks</a> */}
-                <div className="avatar online">
-                    <div className="w-12 cursor-pointer rounded-full mr-3">
-                        <img src="https://media.licdn.com/dms/image/C4E03AQFGdrbBw3FYhA/profile-displayphoto-shrink_800_800/0/1629123595387?e=2147483647&v=beta&t=aBmdqgV5O3-TkLNUQ29LT2Sq7ALr0TqN0KqK4N0EV4s" />
+                {user &&
+                    <div className="avatar online">
+                        <div className="w-12 cursor-pointer rounded-full mr-3">
+                            <img src={user?.photoURL || "https://truckomat.com/wp-content/uploads/2019/06/avatar-960_720-e1562935069333.png"} />
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </nav>
     );
