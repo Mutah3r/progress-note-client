@@ -1,12 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-const githubProvider = new GithubAuthProvider();
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
@@ -30,10 +29,6 @@ const AuthProvider = ({ children }) => {
 
     const googleLogin = () => {
         return signInWithPopup(auth, googleProvider)
-    }
-
-    const githubLogin = () => {
-        return signInWithPopup(auth, githubProvider);
     }
 
     useEffect(() => {
@@ -60,8 +55,7 @@ const AuthProvider = ({ children }) => {
         createUser,
         signIn,
         logOut,
-        googleLogin,
-        githubLogin
+        googleLogin
     };
 
     return (
