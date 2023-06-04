@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+* {
+    font-family: 'Sora', sans-serif;
+}
+
+.button {
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.button:hover {
+    background: linear-gradient(104.42deg, #4745D0 0%, #1c19b4 80.23%);
+}
+
+.button-primary {
+    background: linear-gradient(104.42deg, #4745D0 0%, #2A27C9 60.23%);
+    box-shadow: inset -4px -4px 4px rgba(0, 0, 0, 0.1), inset 4px 4px 4px rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+}
